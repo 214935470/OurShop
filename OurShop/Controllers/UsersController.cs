@@ -36,8 +36,8 @@ namespace OurShop.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] User user)
         {
-            int res= userServices.cheakPassword(user.Password);
-            if(res < 3)
+            int res= userServices.cheakPassword(user.Password);//not here, in services
+            if (res < 3)
             {
                 return (BadRequest(user));
             }
@@ -60,7 +60,7 @@ namespace OurShop.Controllers
 
 
         }
-
+        //put?????
 
 
 

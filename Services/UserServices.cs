@@ -21,7 +21,7 @@ namespace Services
             int a = user.Email.IndexOf('@');
             int b = user.Email.IndexOf(".com");
             if (a != -1 && b != -1 && a<b)
-            {
+            {  //check password strength
                 return userRepository.AddUser(user);
             }
             else
@@ -50,7 +50,7 @@ namespace Services
 
 
         public void UpdateUser(int id, User userToUpdate)
-        {
+        {  //check password strength
 
             userRepository.UpdateUser(id, userToUpdate);
 
