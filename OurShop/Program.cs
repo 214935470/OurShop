@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using Services;
 
@@ -8,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUserRepository,UserRepository>();
 builder.Services.AddScoped<IUserServices, UserServices>();
+builder.Services.AddDbContext<AdoNetManageContext>(options => options.UseSqlServer("Data Source=srv2\\pupils;Initial Catalog = AdoNetManage;Integrated Security = True; Pooling = False"));
+
+
 
 var app = builder.Build();
 

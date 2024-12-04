@@ -5,11 +5,11 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OurShop", "OurShop\OurShop.csproj", "{28FC4B20-472B-48F6-A00C-0992461F8423}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{B613A847-388B-44EB-9783-FE536ABE3F5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{B613A847-388B-44EB-9783-FE536ABE3F5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{89A65AF8-36BA-4818-9235-6A019759161F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{89A65AF8-36BA-4818-9235-6A019759161F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entitis", "Entitis\Entitis.csproj", "{7149CB03-FCF5-4BD1-B78C-ABEAA13097AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entits", "Entitis\Entits.csproj", "{7149CB03-FCF5-4BD1-B78C-ABEAA13097AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

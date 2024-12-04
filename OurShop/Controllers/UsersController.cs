@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using Services;
-using Entitis;
+using Entits;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace OurShop.Controllers
@@ -34,14 +34,14 @@ namespace OurShop.Controllers
 
         // POST api/<UsersController>
         [HttpPost]
-        public IActionResult Post([FromBody] User user)
+        public async Task<IActionResult> Post([FromBody] User user)
         {
             int res= userServices.cheakPassword(user.Password);
             if(res < 3)
             {
                 return (BadRequest(user));
             }
-            User newUser = userServices.AddUser(user);
+            User newUser = await userServices.AddUser(user);
            
 
             //if(newUser == null)
@@ -100,9 +100,9 @@ namespace OurShop.Controllers
 
 
         [HttpPost("login")]
-        public IActionResult Login([FromQuery] string email, [FromQuery] string password)
+        public async Task<IActionResult> Login([FromQuery] string email, [FromQuery] string password)
         {
-            User newUser = userServices.Login(email,password);
+            User newUser =await userServices.Login(email,password);
             return (Ok(newUser));
             //using (StreamReader reader = System.IO.File.OpenText("M:\\webAPI\\OurShop\\OurShop\\Users.txt"))
             //{
@@ -125,7 +125,7 @@ namespace OurShop.Controllers
 
         // PUT api/<UsersController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] User userToUpdate)
+        public async Task<IActionResult> Put(int id, [FromBody] User userToUpdate)
         {
             int res = userServices.cheakPassword(userToUpdate.Password);
             if (res < 3)
@@ -133,7 +133,7 @@ namespace OurShop.Controllers
                 return (BadRequest(userToUpdate));
             }
             
-             userServices.UpdateUser(id, userToUpdate);
+            await userServices.UpdateUser(id, userToUpdate);
             return (Ok(userToUpdate));
 
 
