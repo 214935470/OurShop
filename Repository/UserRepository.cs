@@ -26,8 +26,10 @@ namespace Repository
 
             //return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
             await _AdoNetManageContext.AddAsync(user);
+            //var res=await _AdoNetManageContext.AddAsync(user);
             await _AdoNetManageContext.SaveChangesAsync();
             return user;
+            //return res- has the created user- with the id
 
         }
 
@@ -56,7 +58,7 @@ namespace Repository
         }
 
 
-        public async Task UpdateUser(int id, User userToUpdate)
+        public async Task UpdateUser(int id, User userToUpdate)//return user
         {
              _AdoNetManageContext.Update(userToUpdate);
 
