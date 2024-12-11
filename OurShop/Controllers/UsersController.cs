@@ -27,9 +27,9 @@ namespace OurShop.Controllers
 
         // GET api/<UsersController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<User> GetUserById(int id)
         {
-            return "value";
+            return await userServices.GetUserById(id);
         }
 
         // POST api/<UsersController>
@@ -89,8 +89,8 @@ namespace OurShop.Controllers
 
 
 
-
-
+        
+   
 
 
 
@@ -163,20 +163,6 @@ namespace OurShop.Controllers
 
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         // DELETE api/<UsersController>/5

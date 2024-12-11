@@ -25,7 +25,7 @@ namespace Repository
             //return (user);
 
             //return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
-            await _AdoNetManageContext.AddAsync(user);
+            await _AdoNetManageContext.Users.AddAsync(user);
             await _AdoNetManageContext.SaveChangesAsync();
             return user;
 
@@ -55,10 +55,21 @@ namespace Repository
 
         }
 
+        public async Task<User> GetUserById(int id)
+        {
+            User user = await _AdoNetManageContext.Users.FirstOrDefaultAsync(u => u.Id == id);
+            return user;
+
+        }
+
+
+
 
         public async Task UpdateUser(int id, User userToUpdate)
         {
-             _AdoNetManageContext.Update(userToUpdate);
+            userToUpdate.Id = id;
+
+            _AdoNetManageContext.Users.Update(userToUpdate);
 
             await _AdoNetManageContext.SaveChangesAsync();
 

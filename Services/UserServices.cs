@@ -21,7 +21,7 @@ namespace Services
         {
             int a = user.Email.IndexOf('@');
             int b = user.Email.IndexOf(".com");
-            if (a != -1 && b != -1 && a<b)
+            if (a != -1 && b != -1 && a < b)
             {
                 return await userRepository.AddUser(user);
             }
@@ -29,7 +29,7 @@ namespace Services
             {
                 return (null);
             }
-            
+
         }
 
         public int cheakPassword(string password)
@@ -40,7 +40,7 @@ namespace Services
             return result.Score;
 
         }
-        
+
         public async Task<User> Login(string email, string password)
         {
 
@@ -49,11 +49,17 @@ namespace Services
 
         }
 
+        public async Task<User> GetUserById(int id)
+        {
+            return await userRepository.GetUserById(id);
+        }
+
+
 
         public async Task UpdateUser(int id, User userToUpdate)
         {
 
-          await userRepository.UpdateUser(id, userToUpdate);
+            await userRepository.UpdateUser(id, userToUpdate);
 
         }
 
