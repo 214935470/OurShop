@@ -1,4 +1,6 @@
-﻿using Entits;
+﻿using AutoMapper;
+using DTO;
+using Entits;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -10,18 +12,24 @@ namespace OurShop.Controllers
     public class ProductController : ControllerBase
     {
         IProductServices productServices;
+        IMapper mapper;
 
-
-        public ProductController(IProductServices productServices)
+        public ProductController(IProductServices productServices,IMapper mapper)
         {
             this.productServices = productServices;
+            this.mapper = mapper;
         }
 
         // GET: api/<ProductController>
         [HttpGet]
-        public async Task<List<Product>> Get()
-        {
-            return await productServices.GetProduct();
+        public async Task<List<ProductDTO>> Get()
+        { 
+
+             List <Product> productList = await productServices.GetProduct();
+             List<ProductDTO> productDTOs = mapper.Map<List<Product>, List<ProductDTO>>(productList);
+             return productDTOs;
+            
+
         }
 
         // GET api/<ProductController>/5

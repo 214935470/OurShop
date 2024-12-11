@@ -22,7 +22,7 @@ builder.Services.AddScoped<IOrderServices, OrderServices>();
 builder.Services.AddDbContext<AdoNetManageContext>(options => options.UseSqlServer("Data Source=srv2\\pupils;Initial Catalog = AdoNetManage;Integrated Security = True; Pooling = False"));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
