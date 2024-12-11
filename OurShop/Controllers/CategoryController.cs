@@ -42,7 +42,7 @@ namespace OurShop.Controllers
         public void Put(int id, [FromBody] Category category)
         {
             //await categoryServices.UpdateCategory(id, category);
-        }
+        }  
 
 
         // DELETE api/<CategoryController>/5
