@@ -27,8 +27,9 @@ namespace Repository
 
         public async Task<Order> GetOrderById(int id)
         {
-            Order order = await _AdoNetManageContext.Orders.FirstOrDefaultAsync(o => o.Id == id);
-            return order;
+            //Order order =
+                return await _AdoNetManageContext.Orders.FirstOrDefaultAsync(o => o.Id == id);
+            //return order;
 
         }
 

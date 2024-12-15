@@ -35,8 +35,9 @@ namespace Repository
 
         public async Task<User> Login(string email, string password)
         {
-            User user = await _AdoNetManageContext.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
-            return user;
+            //User user = 
+                return await _AdoNetManageContext.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+            //return user;
             //using (StreamReader reader = System.IO.File.OpenText("M:\\webAPI\\OurShop\\OurShop\\Users.txt"))
             //{
             //    string? currentUserInFile;
@@ -57,15 +58,16 @@ namespace Repository
 
         public async Task<User> GetUserById(int id)
         {
-            User user = await _AdoNetManageContext.Users.FirstOrDefaultAsync(u => u.Id == id);
-            return user;
+            //User user = 
+              return  await _AdoNetManageContext.Users.FirstOrDefaultAsync(u => u.Id == id);
+            //return user;
 
         }
 
 
 
 
-        public async Task UpdateUser(int id, User userToUpdate)
+        public async Task UpdateUser(int id, User userToUpdate)//return user
         {
             userToUpdate.Id = id;
 

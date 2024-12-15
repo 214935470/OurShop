@@ -54,7 +54,7 @@ namespace OurShop.Controllers
                 return (BadRequest(user));
             }
             User newUser = await userServices.AddUser(user);
-           
+
 
             //if(newUser == null)
             //{
@@ -65,8 +65,10 @@ namespace OurShop.Controllers
             //string userJson = JsonSerializer.Serialize(user);
             //System.IO.File.AppendAllText("M:\\webAPI\\OurShop\\OurShop\\Users.txt", userJson + Environment.NewLine);
             //return (Ok(user));
-               //return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
-            return (Ok(newUser));
+            //return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
+            return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
+
+           // return (Ok(newUser));
            
            
 
