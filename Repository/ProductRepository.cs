@@ -35,11 +35,28 @@ namespace Repository
         //    await _AdoNetManageContext.SaveChangesAsync();
         //}
 
-        public async Task<List<Product>> GetProduct()
-        {
-            return await _AdoNetManageContext.Products.ToListAsync();
+        //public async Task<List<Product>> GetProduct()
+        //{
+        //    //return await _AdoNetManageContext.Products.Include(c => c.Category).ToListAsync();
 
+
+        //}
+
+       public async Task<List<Product>> GetProduct(int position, int skip, string? desc, int? minPrice, int? maxPrice, int?[] categoryIds)
+        {
+            var query = _AdoNetManageContext.Products.Where(product =>
+              (desc == null ? (true) : (product.Description.Contains(desc)))
+              && ((minPrice == null) ? (true) : (product.Price >= minPrice))
+              && ((maxPrice == null) ? (true) : (product.Price <= maxPrice))
+              && ((categoryIds.Length == 0) ? (true) : (categoryIds.Contains(product.CategoryId))))
+              .OrderBy(product => product.Price).Include(a => a.Category);
+            List<Product> products = await query.ToListAsync();
+            return products;
         }
+
+
+
+
 
         //public async Task DeleteProduct(int id, Product productToDelete)
         //{

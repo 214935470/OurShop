@@ -9,8 +9,15 @@ namespace OurShop
         public Mapper()
         {
             CreateMap<Product, ProductDTO>().ForMember(c => c.CategoryName, name => name.MapFrom(src => src.Category.Name));
+            
             CreateMap<User, UserDTO>();
 
+            CreateMap<Order, OrderDTO>();
+
+            CreateMap<OrderItem, OrderItemDTO>().ReverseMap();
+
+            CreateMap<OrderPostDTO,Order >();
+           
 
         }
     }

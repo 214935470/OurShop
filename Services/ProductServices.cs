@@ -29,9 +29,9 @@ namespace Services
         //    await productRepository.DeleteProduct(id, productToDelete);
         //}
 
-        public async Task<List<Product>> GetProduct()
+        public async Task<List<Product>> GetProduct(int position, int skip, string? desc, int? minPrice, int? maxPrice, int?[] categoryIds)
         {
-            return await productRepository.GetProduct();
+            return await productRepository.GetProduct(position, skip, desc, minPrice, maxPrice, categoryIds);
         }
 
         //public async Task UpdateProduct(int id, Product productToUpdate)
