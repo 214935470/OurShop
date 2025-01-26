@@ -12,7 +12,7 @@ const filterProducts = async () => {
   
     props = getDataFromUser();
     alert("filterProducts")
-    let url = `https://localhost:7057/api/Product/`
+    let url = `https://localhost:7057/api/Product/`//just api/Product
     if (props.maxPrice || props.minPrice || props.nameSearch) {
         url + '?'
     }
