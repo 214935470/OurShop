@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Services;
+using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Host.UseNLog();
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -19,7 +20,7 @@ builder.Services.AddScoped<ICategoryServices, CategoryServices>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderServices, OrderServices>();
 
-builder.Services.AddDbContext<AdoNetManageContext>(options => options.UseSqlServer("Data Source=srv2\\pupils;Initial Catalog = AdoNetManage;Integrated Security = True; Pooling = False"));
+builder.Services.AddDbContext<AdoNetManageContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConectionString")));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -31,6 +32,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
 }
 
 // Configure the HTTP request pipeline.

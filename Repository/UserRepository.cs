@@ -1,5 +1,6 @@
 ﻿using Entits;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System.Text.Json;
 
 namespace Repository
@@ -9,10 +10,11 @@ namespace Repository
         public static List<User> Users { get; set; }
 
         AdoNetManageContext _AdoNetManageContext;
-
-        public UserRepository(AdoNetManageContext manageDbContext)
+        private readonly ILogger<UserRepository> _logger;
+        public UserRepository(AdoNetManageContext manageDbContext, ILogger<UserRepository> logger )
         {
             this._AdoNetManageContext = manageDbContext;
+            _logger = logger;
         }
 
 
@@ -36,6 +38,8 @@ namespace Repository
         public async Task<User> Login(string email, string password)
         {
             User user = await _AdoNetManageContext.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+            if(user != null)
+                _logger.LogCritical($"login attempted with User Name , {email} and password{password}");
             return user;
             //using (StreamReader reader = System.IO.File.OpenText("M:\\webAPI\\OurShop\\OurShop\\Users.txt"))
             //{

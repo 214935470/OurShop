@@ -1,20 +1,20 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <script src="/Products.js"></script>
-    <link href="/Products.css" rel="stylesheet" />
+    <script src="./js/Products.js"></script>
+    <link href="./css/Products.css" rel="stylesheet" />
 
     <meta charset="utf-8" />
     <title></title>
     <template id="temp-card">
         <div class="card">
-            <div class="img-w">
-                <img src="tmp.jpg" alt="" style="width:100%">
+            <div class="img">
+                <img src="tmp.jpg" alt="tmp" style="width:100%">
             </div>
             <h1></h1>
             <p class="price"></p>
             <p class="description"></p>
-            <p><button>הוסף לסל</button></p>
+            <p><button class="bag">הוסף לסל</button></p>
         </div>
     </template>
     <template id="temp-category">
@@ -67,7 +67,7 @@
 
     <div id="filters" class="Filters fixedVisible">
         <div class="ResultCount" style="position: absolute; top: 0px;">
-            <a class="Clear" href="">נקה הכל</a>
+            <a class="Clear"  href="" >נקה הכל</a>
             <div><span id="counter">  </span> מוצרים</div>
 
             <div>
@@ -77,6 +77,7 @@
             </div>
         </div>
         <div id="categoryList" class="filterBreak">
+
             <span>בחירת קטגוריה</span>
         </div>
 
@@ -84,8 +85,8 @@
 
             <input type="text" id="nameSearch" class="floatRight" placeholder="חיפוש לפי שם מוצר">
 
-            <button class="floatRight" tabindex="0" onclick="filterProducts()">
-                <span class="header42"><img src="/searchIcon.svg" alt="סמל חיפוש"></span>
+            <button class="floatRight" tabindex="0" onclick="GetProducts()">
+                <span class="header42"><img src="./pictures/searchIcon.svg" alt="סמל חיפוש"></span>
             </button>
         </div>
         <div id="priceRangeFilter" class="filterBreak">
@@ -96,10 +97,9 @@
 
             <input type="text" maxlength="9" id="maxPrice" class="priceInputText">
             <span class="priceCurrency">₪</span>
-            <button onclick="filterProducts()">
-                <span><img src="/searchIcon.svg" alt="סמל חיפוש"></span>
+            <button onclick="GetProducts()">
+                <span><img src="./pictures/searchIcon.svg" alt="סמל חיפוש"></span>
             </button>
-            
         </div>
     </div>
 
