@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Repository;
 using Services;
 using NLog.Web;
-using MyShop;
+using OurShop;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseNLog();
@@ -21,7 +21,9 @@ builder.Services.AddScoped<ICategoryServices, CategoryServices>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderServices, OrderServices>();
 
+builder.Services.AddScoped<IRatingRepository, RatingRepository>();
 builder.Services.AddScoped<IRatingServices, RatingServices>();
+
 
 builder.Services.AddDbContext<AdoNetManageContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConectionString")));
 builder.Services.AddEndpointsApiExplorer();
@@ -44,9 +46,9 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
-app.UseMiddlewareRating();
-
 app.UseAuthorization();
+
+app.UseMiddlewareRating();
 
 app.MapControllers(); 
 

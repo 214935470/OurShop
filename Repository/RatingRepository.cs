@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using AutoMapper;
 namespace Repository
 {
     public class RatingRepository : IRatingRepository
@@ -23,7 +23,7 @@ namespace Repository
         {
 
             await _AdoNetManageContext.Ratings.AddAsync(rating);
-            await _AdoNetManageContext.Ratings.SaveChangesAsync();
+            await _AdoNetManageContext.SaveChangesAsync();
             return rating;
 
         }

@@ -11,15 +11,13 @@ namespace Services
 {
     public class RatingServices : IRatingServices
     {
-        AdoNetManageContext _AdoNetManageContext;
-        private readonly ILogger<UserRepository> _logger;
-        RatingRepository ratingRepository;
+      
+        IRatingRepository ratingRepository;
 
-        public RatingServices(AdoNetManageContext manageDbContext, ILogger<UserRepository> logger, RatingRepository _ratingRepository)
+        public RatingServices(AdoNetManageContext manageDbContext, ILogger<UserRepository> logger, IRatingRepository _ratingRepository)
         {
             ratingRepository = _ratingRepository;
-            this._AdoNetManageContext = manageDbContext;
-            _logger = logger;
+      
         }
 
         public async Task<Rating> AddRating(Rating rating)
