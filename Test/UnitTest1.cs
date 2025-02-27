@@ -22,9 +22,11 @@ namespace Test
 
                 var userRepository = new UserRepository(mockContext.Object);
 
-                var result = await userREpository.Login(user.Email, user.Password);
+                var result = await userRepository.Login(user.Email, user.Password);
 
-                Assert.Equal(user, result);
+                Assert.AreEqual(user, result);
+                //Assert.Equal(user, result);
+              
 
             }
         }

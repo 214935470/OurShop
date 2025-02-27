@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 
-namespace Repository
+namespace Repository.UserRepository
 {
     public class UserRepository : IUserRepository
     {
@@ -17,6 +17,11 @@ namespace Repository
             _logger = logger;
         }
 
+        public UserRepository(AdoNetManageContext manageDbContext)
+        {
+            this._AdoNetManageContext = manageDbContext;
+            
+        }
 
         public async Task<User> AddUser(User user)
         {
