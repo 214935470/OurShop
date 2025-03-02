@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 
-namespace Repository.UserRepository
+namespace Repository
 {
     public class UserRepository : IUserRepository
     {
@@ -11,16 +11,17 @@ namespace Repository.UserRepository
 
         AdoNetManageContext _AdoNetManageContext;
         private readonly ILogger<UserRepository> _logger;
-        public UserRepository(AdoNetManageContext manageDbContext, ILogger<UserRepository> logger )
-        {
-            this._AdoNetManageContext = manageDbContext;
-            _logger = logger;
-        }
+
+        //public UserRepository(AdoNetManageContext manageDbContext, ILogger<UserRepository> logger ) ------------------------------------------------
+        //{
+        //    this._AdoNetManageContext = manageDbContext;
+        //    _logger = logger;
+        //}
 
         public UserRepository(AdoNetManageContext manageDbContext)
         {
             this._AdoNetManageContext = manageDbContext;
-            
+
         }
 
         public async Task<User> AddUser(User user)
@@ -43,8 +44,8 @@ namespace Repository.UserRepository
         public async Task<User> Login(string email, string password)
         {
             User user = await _AdoNetManageContext.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
-            if(user != null)
-                _logger.LogCritical($"login attempted with User Name , {email} and password{password}");
+            //if(user != null)
+            //    _logger.LogCritical($"login attempted with User Name , {email} and password{password}"); -------------------------------------------------------
             return user;
             //using (StreamReader reader = System.IO.File.OpenText("M:\\webAPI\\OurShop\\OurShop\\Users.txt"))
             //{

@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using Entits;
 using Repository;
 using DTO;
+using Microsoft.Extensions.Logging;
 namespace Services
 {
     public class OrderServices : IOrderServices
     {
+        private readonly ILogger<OrderServices> _logger;
         IOrderRepository orderRepository;
 
 
@@ -31,6 +33,23 @@ namespace Services
 
 
 
+        private async Task<Order> getSum(Order Order)
+        {
+            float sum = 0;
+            foreach (var product in Order.OrderItems)
+            {
+                Product goodProduct = await ProductRepository.GetById(product.Id);
+                sum += (float)goodProduct.Price;
+            }
+            if (Order.OrderSum != sum)
+            {
+
+                Order.OrderSum = sum;
+                _logger.LogError("הכניס סכום בכוחות עצמו");
+            }
+
+            return Order;
+        }
 
 
     }

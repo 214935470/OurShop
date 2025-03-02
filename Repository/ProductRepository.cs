@@ -56,7 +56,11 @@ namespace Repository
 
 
 
-
+        public async Task<Product> GetById(int productId)
+        {
+            Product product = await _AdoNetManageContext.Products.FirstOrDefaultAsync(p => p.Id == productId);
+            return product;
+        }
 
         //public async Task DeleteProduct(int id, Product productToDelete)
         //{

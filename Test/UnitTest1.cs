@@ -9,10 +9,9 @@ namespace Test
     
     public class UnitTest1
     {
-        public void TestMethod1()
-        {
+        
             [Fact]
-            public async Task GetUser_ValidCredentials_ReturnsUser()
+            private  async Task GetUser_ValidCredentials_ReturnsUser()
             {
                 var user = new User() { Email = "batyaOzeri@gmail.com", Password = "batyaOzeri123!" };
 
@@ -29,6 +28,6 @@ namespace Test
               
 
             }
-        }
+        
     }
 }

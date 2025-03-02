@@ -6,11 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DTO;
+using Entits;
+
+
 using AutoMapper;
+using Microsoft.Extensions.Logging;
 namespace Repository
 {
     public class OrderRepository : IOrderRepository
     {
+  
         AdoNetManageContext _AdoNetManageContext;
         IMapper mapper;
         public OrderRepository(AdoNetManageContext manageDbContext, IMapper mapper)
@@ -36,6 +41,7 @@ namespace Repository
 
         }
 
+       
 
     }
 }
