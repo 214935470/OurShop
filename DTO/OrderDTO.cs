@@ -8,5 +8,5 @@ using Entits;
 namespace DTO
 {
     public record OrderDTO(int Id, DateTime? OrderDate, double? OrderSum, ICollection<OrderItemDTO> OrderItems);
-    public record OrderPostDTO(int Id, DateTime? OrderDate, double? OrderSum, int UserId);
+    public record OrderPostDTO(int UserId, DateTime? OrderDate, double? OrderSum, ICollection<OrderItemDTO> OrderItems);
 }

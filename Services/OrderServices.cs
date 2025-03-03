@@ -13,16 +13,20 @@ namespace Services
     {
         private readonly ILogger<OrderServices> _logger;
         IOrderRepository orderRepository;
+        IProductRepository productRepository;
 
-
-        public OrderServices(IOrderRepository orderRepository)
+        public OrderServices(IOrderRepository orderRepository, IProductRepository productRepository, ILogger<OrderServices> logger)
         {
             this.orderRepository = orderRepository;
+            this.productRepository = productRepository;
+            _logger = logger;
         }
 
         public async Task<Order> AddOrder(Order order)
         {
-            return await orderRepository.AddOrder(order);
+            order.OrderDate = DateTime.Now;
+            Order order1 = await getSum(order);
+            return await orderRepository.AddOrder(order1);
 
         }
 
@@ -38,19 +42,22 @@ namespace Services
             float sum = 0;
             foreach (var product in Order.OrderItems)
             {
-                Product goodProduct = await ProductRepository.GetById(product.Id);
+                Product goodProduct = await productRepository.GetById(product.ProductId);
                 sum += (float)goodProduct.Price;
             }
             if (Order.OrderSum != sum)
             {
 
                 Order.OrderSum = sum;
-                _logger.LogError("הכניס סכום בכוחות עצמו");
+                _logger.LogCritical("הכניס סכום בכוחות עצמו" + Order.UserId + "משתמש ");
             }
 
             return Order;
         }
 
+
+
+      
 
     }
 }

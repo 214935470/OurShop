@@ -14,6 +14,8 @@ namespace OurShop
 
             CreateMap<Order, OrderDTO>();
 
+            CreateMap<OrderDTO, Order>();
+
             CreateMap<OrderItem, OrderItemDTO>().ReverseMap();
 
             CreateMap<OrderPostDTO,Order >();

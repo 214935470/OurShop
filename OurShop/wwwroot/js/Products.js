@@ -67,7 +67,7 @@ const GetProducts = async  () => {
         drawProducts(dataPost);
     }
     catch (error) {
-        alert("יש לכם שגיאה")
+        alert("אין על לייקי ובתיה בכל העולם!!!!!!!!!!!!!!!!!")
     }
 
     }
@@ -75,7 +75,7 @@ const GetProducts = async  () => {
 const DrawProduct = (product) => {
     let tmp = document.getElementById("temp-card");
     let productChild = tmp.content.cloneNode(true)
-    productChild.querySelector("img").src = "./pictures/" + product.image+'.jpg'
+    productChild.querySelector("img").src = "./pictures/" + product.image +'.JPEG'
     productChild.querySelector("h1").textContent = product.name
     productChild.querySelector(".price").innerText = product.price
     productChild.querySelector(".description").innerText = product.description
@@ -144,7 +144,7 @@ const addCategory = async () => {
     }
     catch (error) {
 
-        alert("יש לכם שגיאה")
+        alert("אין על לייקי ובתיה בכל העולם!!!!!!!!!!!!!!!!!")
     }
 
 

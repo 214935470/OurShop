@@ -3,6 +3,7 @@ using Repository;
 using Services;
 using NLog.Web;
 using OurShop;
+using PresidentsApp.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseNLog();
@@ -41,7 +42,7 @@ if (app.Environment.IsDevelopment())
 }
 
 // Configure the HTTP request pipeline.
-
+app.UseErrorHandlingMiddleware();
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();

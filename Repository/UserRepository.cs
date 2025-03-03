@@ -12,19 +12,19 @@ namespace Repository
         AdoNetManageContext _AdoNetManageContext;
         private readonly ILogger<UserRepository> _logger;
 
-        //public UserRepository(AdoNetManageContext manageDbContext, ILogger<UserRepository> logger ) ------------------------------------------------
-        //{
-        //    this._AdoNetManageContext = manageDbContext;
-        //    _logger = logger;
-        //}
-
-        public UserRepository(AdoNetManageContext manageDbContext)
+        public UserRepository(AdoNetManageContext manageDbContext, ILogger<UserRepository> logger) 
         {
             this._AdoNetManageContext = manageDbContext;
-
+            _logger = logger;
         }
 
-        public async Task<User> AddUser(User user)
+    //public UserRepository(AdoNetManageContext manageDbContext)
+    //    {
+    //        this._AdoNetManageContext = manageDbContext;
+
+    //    }
+
+    public async Task<User> AddUser(User user)
         {
             //int numberOfUsers = System.IO.File.ReadLines("M:\\webAPI\\OurShop\\OurShop\\Users.txt").Count();
             //user.Id = numberOfUsers + 1;
@@ -43,10 +43,14 @@ namespace Repository
 
         public async Task<User> Login(string email, string password)
         {
-            User user = await _AdoNetManageContext.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
-            //if(user != null)
-            //    _logger.LogCritical($"login attempted with User Name , {email} and password{password}"); -------------------------------------------------------
+            User user = await _AdoNetManageContext.Users.FirstOrDefaultAsync(u => (u.Email == email && u.Password == password));
+          
+
+            if (user != null)
+                _logger.LogInformation($"login attempted with User Name , {email} and password{password}");
+
             return user;
+
             //using (StreamReader reader = System.IO.File.OpenText("M:\\webAPI\\OurShop\\OurShop\\Users.txt"))
             //{
             //    string? currentUserInFile;

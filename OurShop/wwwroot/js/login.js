@@ -10,30 +10,35 @@ const showRegister = () => {
 }
 
 const addUser = async  () => {
-   const user =  newRegister()
-    try {
-        const responsePost = await fetch('https://localhost:7057/api/Users', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
+    const user = newRegister()
+    if (user) {
+        try {
+            const responsePost = await fetch('https://localhost:7057/api/Users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(user)
 
-        })
+            })
 
-        const dataPost = await responsePost.json()
-        if (responsePost.ok)
-            alert("Add user sucsessfully")
-        /*alert(dataPost)*/
-        else {
-            if (responsePost.status === 400)
-                alert("חוזק סיסמא לא תקין")
+            const dataPost = await responsePost.json()
+            if (responsePost.ok) {
+                alert("Add user sucsessfully")
+                SaveStorege(dataPost)
+                
+            }
+              
+            /*alert(dataPost)*/
+            else {
+                if (responsePost.status == 400)
+                    alert("חוזק סיסמא לא תקין") 
+            }
+        }
+        catch (err) {
+            alert(err)
         }
     }
-    catch (err) {
-        alert(err)
-    }
- 
 
   
 }
@@ -83,9 +88,23 @@ const newRegister = () => {
 
     const lastName = document.querySelector("#lastName").value
 
-    const user = {email, password, firstName, lastName }
+    if (email.indexOf('@') == -1 || email.indexOf('.') == -1) { 
+        alert("Field email must include @ and .")
+         return
+}
+    if (firstName.length < 2 || firstName.length > 20 || lastName.length < 2 || lastName.length > 20) {
+        alert("Name can be between 2 till 20 letters")
+        return
+    }
+    else if (!email || !password || !firstName || !lastName) {
+        alert("All field are required")
+        return
+    }
+    else
+        return ({ email, password, firstName, lastName })
+    //const user = {email, password, firstName, lastName }
 
-    return user
+    //return user
 }
 
 
@@ -93,7 +112,7 @@ const userLogin = () => {
     const email = document.querySelector("#emailLogin").value
     const password = document.querySelector("#passwordLogin").value
 
-    const user = { email, password}
+    const user = {email, password}
     return user
 }
 
@@ -117,17 +136,28 @@ const fetchLogin = async () => {
         const postData = await responsePost.json()
         if (responsePost.ok) {
             console.log('post data:', postData)
-
-            sessionStorage.setItem("Name", postData.firstName)
-            sessionStorage.setItem("Id", postData.id)
-            window.location.href = "userDetails.html"
+            SaveStorege(postData)
+            //sessionStorage.setItem("Id", postData.id)
+            //sessionStorage.setItem("Email", postData.email)
+            // //sessionStorage.setItem("Id", postData.lastName)
+            //sessionStorage.setItem("FirstName", postData.firstName)
+            //sessionStorage.setItem("LastName", postData.lastName)
+            /*window.location.href = "userDetails.html"*/
         }
         else {
             alert("שדות חובה")
         }
     }
     catch (err) {
-        alert(err)
+        alert("משתמש לא קיים במערכת")
     }
 
+}
+const SaveStorege = (postData) => {
+    sessionStorage.setItem("Id", postData.id)
+    sessionStorage.setItem("Email", postData.email)
+    //sessionStorage.setItem("Id", postData.lastName)
+    sessionStorage.setItem("FirstName", postData.firstName)
+    sessionStorage.setItem("LastName", postData.lastName)
+    window.location.href = "Products.html"
 }

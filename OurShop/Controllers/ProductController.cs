@@ -33,31 +33,31 @@ namespace OurShop.Controllers
         }
 
         // GET api/<ProductController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        //[HttpGet("{id}")]
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
         // POST api/<ProductController>
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-            //return await productServices.AddProduct(product);
-        }
+        //[HttpPost]
+        //public void Post([FromBody]string value)
+        //{
+        //    //return await productServices.AddProduct(product);
+        //}
 
         // PUT api/<ProductController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Product productToUpdate)
-        {
-            //await productServices.UpdateProduct(id, productToUpdate);
-        }
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] Product productToUpdate)
+        //{
+        //    //await productServices.UpdateProduct(id, productToUpdate);
+        //}
 
         // DELETE api/<ProductController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id, [FromBody] Product productToDelete)
-        {
-            //await productServices.DeleteProduct(id, productToDelete);
-        }
+        //[HttpDelete("{id}")]
+        //public void Delete(int id, [FromBody] Product productToDelete)
+        //{
+        //    //await productServices.DeleteProduct(id, productToDelete);
+        //}
     }
 }

@@ -21,6 +21,7 @@ namespace Services
         {
             int a = user.Email.IndexOf('@');
             int b = user.Email.IndexOf(".com");
+          
             if (a != -1 && b != -1 && a < b)
             {
                 return await userRepository.AddUser(user);
@@ -43,7 +44,6 @@ namespace Services
 
         public async Task<User> Login(string email, string password)
         {
-
             return await userRepository.Login(email, password);
 
 

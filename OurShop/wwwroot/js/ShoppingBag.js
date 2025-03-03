@@ -20,7 +20,7 @@ const DrawProducts = () => {
 const DrawProduct = (product) => {
     let tmp = document.getElementById("temp-row");
     let ProductChild = tmp.content.cloneNode(true)
-    let url = `./pictures/${product.image}.jpg`
+    let url = `./pictures/${product.image}.JPEG`
 
     ProductChild.querySelector(".image").style.backgroundImage = `url(${url})`
     //cloneProduct.querySelector(".img").src = "./pictures/" + product.image
@@ -42,14 +42,18 @@ const deleteFromCart = (product) => {
     sessionStorage.setItem("shopingBag", JSON.stringify(products))
     DrawProducts()
 }
-const placeOrder = async() => {
+const placeOrder = async () => {
+    if (sessionStorage.user == -1) {
+        alert("אנא התחבר למערכת")
+        window.location.href = "login.html"
+    }
     shopingBag = JSON.parse(sessionStorage.getItem("shopingBag")) || []
     console.log(shopingBag)
     let user = JSON.parse(sessionStorage.getItem("user"))
     if (user != -1 && shopingBag.length != 0) {
         let products = []
         for (let i = 0; i < shopingBag.length; i++) {
-            let currentProduct = { productId: shopingBag[i].id, quentity: 1 }
+            let currentProduct = { ProductId: shopingBag[i].id, Quentity: 1 }
             products.push(currentProduct);
             console.log(currentProduct)
         }
@@ -68,9 +72,9 @@ const placeOrder = async() => {
 
 
             });
-            if (!responsePost.ok) {
-                throw new Error(`HTTP error! status:${response.status}`)
-            }
+            //if (!responsePost.ok) {
+            //    throw new Error(`HTTP error! status:${responsePost.status}`)
+            //}
 
             const dataPost = await responsePost.json();
 

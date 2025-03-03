@@ -23,11 +23,11 @@ namespace OurShop.Controllers
 
 
         // GET: api/<UsersController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "shabat", "shalom" };
-        }
+        //[HttpGet]
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "shabat", "shalom" };
+        //}
 
         // GET api/<UsersController>/5
         [HttpGet("{id}")]
@@ -46,15 +46,15 @@ namespace OurShop.Controllers
 
         // POST api/<UsersController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] User user)
+        public async Task<ActionResult> Post([FromBody] User user)
         {
             int res= userServices.cheakPassword(user.Password);
             if(res < 3)
             {
-                return (BadRequest(user));
+                return (BadRequest("סיסמא חלשה"));
             }
             User newUser = await userServices.AddUser(user);
-           
+
 
             //if(newUser == null)
             //{
@@ -65,10 +65,10 @@ namespace OurShop.Controllers
             //string userJson = JsonSerializer.Serialize(user);
             //System.IO.File.AppendAllText("M:\\webAPI\\OurShop\\OurShop\\Users.txt", userJson + Environment.NewLine);
             //return (Ok(user));
-               //return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
-            return (Ok(newUser));
-           
-           
+            //return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
+            //return (Ok(newUser));
+            return CreatedAtAction(nameof(GetUserById), new { id = newUser.Id},newUser);
+
 
 
         }
@@ -101,21 +101,12 @@ namespace OurShop.Controllers
 
 
 
-        
-   
-
-
-
-
-
-
-
-
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromQuery] string email, [FromQuery] string password)
+        public async Task<ActionResult<User>> Login([FromQuery] string email, [FromQuery] string password)
         {
             User newUser =await userServices.Login(email,password);
-            return (Ok(newUser));
+            //return (Ok(newUser));
+            return newUser != null ? Ok(newUser) : NoContent();
             //using (StreamReader reader = System.IO.File.OpenText("M:\\webAPI\\OurShop\\OurShop\\Users.txt"))
             //{
             //    string? currentUserInFile;
@@ -178,9 +169,9 @@ namespace OurShop.Controllers
 
 
         // DELETE api/<UsersController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
     }
 }
