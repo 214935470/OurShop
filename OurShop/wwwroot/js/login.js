@@ -29,7 +29,7 @@ const addUser = async  () => {
                 
             }
               
-            /*alert(dataPost)*/
+ 
             else {
                 if (responsePost.status == 400)
                     alert("חוזק סיסמא לא תקין") 
@@ -102,9 +102,7 @@ const newRegister = () => {
     }
     else
         return ({ email, password, firstName, lastName })
-    //const user = {email, password, firstName, lastName }
-
-    //return user
+  
 }
 
 
@@ -137,12 +135,7 @@ const fetchLogin = async () => {
         if (responsePost.ok) {
             console.log('post data:', postData)
             SaveStorege(postData)
-            //sessionStorage.setItem("Id", postData.id)
-            //sessionStorage.setItem("Email", postData.email)
-            // //sessionStorage.setItem("Id", postData.lastName)
-            //sessionStorage.setItem("FirstName", postData.firstName)
-            //sessionStorage.setItem("LastName", postData.lastName)
-            /*window.location.href = "userDetails.html"*/
+
         }
         else {
             alert("שדות חובה")
@@ -156,7 +149,6 @@ const fetchLogin = async () => {
 const SaveStorege = (postData) => {
     sessionStorage.setItem("Id", postData.id)
     sessionStorage.setItem("Email", postData.email)
-    //sessionStorage.setItem("Id", postData.lastName)
     sessionStorage.setItem("FirstName", postData.firstName)
     sessionStorage.setItem("LastName", postData.lastName)
     window.location.href = "Products.html"

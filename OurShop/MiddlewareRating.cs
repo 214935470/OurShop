@@ -21,12 +21,7 @@ namespace OurShop
 
         public  async Task Invoke(HttpContext httpContext, IRatingServices ratingService)
         {
-            //            •	HOST - כתובת האתר בה אנו גולשים כעת
-            //•	METHOD - המתודה אליה נגשנו)
-            //•	[PATH] URL ה-אליו בוצעה הפניה
-            //•	REFERER - הדף ממנו התבצעה הפניה
-            //•	USER_AGENT - מכיל את שם הדפדפן, גירסתו, מערכת ההפעלה ושפתה
-            //•	RECORD_DATE - תאריך הרישום לרייטינג
+
             Rating ratin = new();
             ratin.Method = httpContext.Request.Method;
             ratin.Host = httpContext.Request.Host.ToString();
@@ -34,7 +29,7 @@ namespace OurShop
             ratin.UserAgent = httpContext.Request.Headers.UserAgent;
             ratin.Referer = httpContext.Request.Headers.Referer;
             ratin.RecordDate = DateTime.Now;
-            //ratin.Host= httpContext.
+   
             await ratingService.AddRating(ratin);
             await _next(httpContext);
         }

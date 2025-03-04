@@ -39,11 +39,11 @@ namespace Services
 
         private async Task<Order> getSum(Order Order)
         {
-            float sum = 0;
+            double sum = 0;
             foreach (var product in Order.OrderItems)
             {
                 Product goodProduct = await productRepository.GetById(product.ProductId);
-                sum += (float)goodProduct.Price;
+                sum += (double)goodProduct.Price;
             }
             if (Order.OrderSum != sum)
             {

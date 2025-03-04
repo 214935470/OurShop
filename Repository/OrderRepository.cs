@@ -17,11 +17,11 @@ namespace Repository
     {
   
         AdoNetManageContext _AdoNetManageContext;
-        IMapper mapper;
-        public OrderRepository(AdoNetManageContext manageDbContext, IMapper mapper)
+
+        public OrderRepository(AdoNetManageContext manageDbContext)
         {
             this._AdoNetManageContext = manageDbContext;
-            this.mapper = mapper;
+ 
         }
 
         public async Task<Order> AddOrder(Order order)
@@ -35,9 +35,8 @@ namespace Repository
 
         public async Task<Order> GetOrderById(int id)
         {
-            //Include(o => o.OrderItems)
-            Order o = await _AdoNetManageContext.Orders.Include(p => p.User).Include(o => o.OrderItems).FirstOrDefaultAsync(o => o.Id == id);
-            return o;
+            Order order = await _AdoNetManageContext.Orders.Include(p => p.User).Include(o => o.OrderItems).FirstOrDefaultAsync(o => o.Id == id);
+            return order;
 
         }
 

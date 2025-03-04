@@ -17,30 +17,10 @@ namespace Repository
             this._AdoNetManageContext = manageDbContext;
         }
 
-        //public async Task<Product> AddProduct(Product product)
-        //{
-        //    await _AdoNetManageContext.Products.AddAsync(product);
-        //    await _AdoNetManageContext.SaveChangesAsync();
-        //    return product;
-
-        //}
 
 
-        //public async Task UpdateProduct(int id, Product productToUpdate)
-        //{
-        //    productToUpdate.Id = id;
-
-        //    _AdoNetManageContext.Products.Update(productToUpdate);
-
-        //    await _AdoNetManageContext.SaveChangesAsync();
-        //}
-
-        //public async Task<List<Product>> GetProduct()
-        //{
-        //    //return await _AdoNetManageContext.Products.Include(c => c.Category).ToListAsync();
 
 
-        //}
 
        public async Task<List<Product>> GetProduct(int position, int skip, string? desc, int? minPrice, int? maxPrice, int?[] categoryIds)
         {
@@ -62,15 +42,7 @@ namespace Repository
             return product;
         }
 
-        //public async Task DeleteProduct(int id, Product productToDelete)
-        //{
-        //    productToDelete.Id = id;
 
-        //    _AdoNetManageContext.Products.Remove(productToDelete);
-
-        //    await _AdoNetManageContext.SaveChangesAsync();
-
-        //}
 
 
     }

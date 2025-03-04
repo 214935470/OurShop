@@ -1,5 +1,6 @@
 using Entits;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Moq.EntityFrameworkCore;
 using Repository;
@@ -63,19 +64,22 @@ namespace TestOurShop
 
         [Fact]
         public async Task CreateOrderSum_CHeckOrderSum_ReturnsOrder()
-        {
+        {  
+            var mockOrderRepository = new Mock<IOrderRepository>();
+            var mockLoggerOrderServices = new Mock<ILogger<OrderServices>>(); 
+            var mockProductRepository = new Mock<IProductRepository>();
             // Arrange
             var orderItems = new List<OrderItem>() { new() { ProductId = 1, Quantity = 1 } };
             var order = new Order { OrderSum = 50, OrderItems = orderItems };
 
-            var mockOrderRepository = new Mock<IOrderRepository>();
+          
             mockOrderRepository.Setup(x => x.AddOrder(It.IsAny<Order>())).ReturnsAsync(order);
 
             List<Product> products = new List<Product> { new() { Id = 1, Price = 50 } };
-            var mockProductRepository = new Mock<IProductRepository>();
+           
             mockProductRepository.Setup(x => x.GetProduct(It.IsAny<int>(), It.IsAny<int>(),It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int?[]>()))
                                  .ReturnsAsync(products);
-            var orderService = new OrderServices(mockOrderRepository.Object);
+            var orderService = new OrderServices(mockOrderRepository.Object,mockProductRepository.Object, mockLoggerOrderServices.Object);
 
             // Act
             var result = await orderService.AddOrder(order);
@@ -86,19 +90,25 @@ namespace TestOurShop
 
 
         [Fact]
-        public async Task AddOrder_WhenOrderIsNull_ReturnsNull()
+        public async Task GetById_ReturnsUser_WhenUserExists()
         {
             // Arrange
-            var mockOrderRepository = new Mock<IOrderRepository>();
-            mockOrderRepository.Setup(x => x.AddOrder(It.IsAny<Order>())).ReturnsAsync((Order)null);
+            var userId = 1;
+            var expectedUser = new User { Id = userId, Email = "testuser@example.com" };
 
-            var orderService = new OrderServices(mockOrderRepository.Object);
+            var mockContext = new Mock<AdoNetManageContext>();
+            var users = new List<User> { expectedUser };
+            mockContext.Setup(x => x.Users).ReturnsDbSet(users);
+
+            var userRepository = new UserRepository(mockContext.Object);
 
             // Act
-            var result = await orderService.AddOrder(null);
+            var result = await userRepository.GetUserById(userId);
 
             // Assert
-            Assert.Null(result); // Ensure the result is null
+            Assert.NotNull(result);
+            Assert.Equal(expectedUser.Id, result.Id);
+            Assert.Equal(expectedUser.Email, result.Email);
         }
     }
 }

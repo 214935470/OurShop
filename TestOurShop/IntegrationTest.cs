@@ -1,4 +1,6 @@
 ﻿using Entits;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Repository;
 using Services;
 using System;
@@ -6,18 +8,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestProject;
 
 namespace TestOurShop
 {
-    public class IntegrationTest:IClassFixture<DatabaseFixture>
+    public class IntegrationTest:IClassFixture<DataBaseFixture>
     {
         private readonly AdoNetManageContext _context;
         private readonly UserRepository _userRepository;
+        private readonly ILogger<OrderServices> _logger;
 
-        public IntegrationTest(DatabaseFixture fixture)
+
+           
+       
+        public IntegrationTest(DataBaseFixture fixture)
         {
             _context = fixture.Context;
-            _userRepository = UserRepository(_context);
+            _userRepository =new UserRepository(_context); 
+            _logger = new NullLogger<OrderServices>();
         }
 
         [Fact]
@@ -27,26 +35,28 @@ namespace TestOurShop
             var user = new User { Email = "batya@example.com", Password = "b0583272120!!!" };
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            var userRepository = new UserRepository(_context);
+
 
 
             // Act
-            var retrievedUser = await userRepository.Login(user.Email, user.Password);
+            var retrievedUser = await _userRepository.Login(user.Email, user.Password);
 
             // Assert
             Assert.NotNull(retrievedUser);
             Assert.Equal(user.Email, retrievedUser.Email);
             Assert.Equal(user.Password, retrievedUser.Password);
+
+
         }
 
         [Fact]
         public async Task DB_Login_ReturnsNotFound_WhenUserNotFound()
         {
             // Arrange
-            var userRepository = new UserRepository(_context);
+
 
             // Act
-            var result = await userRepository.Login("wrongPassword", "nonExistentUser");
+            var result = await _userRepository.Login("wrongPassword", "nonExistentUser");
 
             // Assert
             Assert.Null(result);
@@ -61,60 +71,33 @@ namespace TestOurShop
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            var userRepository = new UserRepository(_context);
+
 
             // Act
-            var result = await userRepository.Login("wrongPassword", user.Email);
+            var result = await _userRepository.Login("wrongPassword", user.Email);
 
             // Assert
             Assert.Null(result);
         }
 
-        //[Fact]
-        //public async Task DB_CreateOrderSum_CHeckOrderSum_ReturnsOrder()
-        //{
-        //    // Arrange
-        //    _context.Categories.Add(new Category { Name = "basic" });
-        //    await _context.SaveChangesAsync();
 
-        //    List<Product> products = new List<Product> { new() { Price = 6, Name = "Milk", Id = 1, Description = "tasty", Image = "1.jpg" }, new() { Price = 20, Name = "eggs", Id = 1, Description = "tasty", Image = "1.jpg" } };
-        //    _context.Products.AddRange(products);
-        //    await _context.SaveChangesAsync();
 
-        //    var orderItems = new List<OrderItem>() { new() { ProductId = 1 }, new() { ProductId = 2 } };
-        //    var order = new Order { OrderSum = 26, OrderItems = orderItems };
+        [Fact]
+        public async Task CreateUser_Should_Add_User_To_Database()
+        {
+            // Arrange
 
-        //    var orderService = new OrderServices(new IOrderRepository(_context));
 
-        //    // Act
-        //    var result = await orderService.AddOrder(order);
+            // Act
+            var user = new User { FirstName = "Laiky", LastName = "Shapira", Email = "mmm@gmail.com", Password = "21436@dfgAS@@!" };
+            var dbUser = await _userRepository.AddUser(user);
 
-        //    // Assert
-        //    Assert.Equal(order, result);
-        //}
+            // Assert
+            Assert.NotNull(dbUser);
+            Assert.NotEqual(0, dbUser.Id);
+            Assert.Equal("mmm@gmail.com", dbUser.Email);
 
-        //[Fact]
-        //public async Task CreateOrderSum_CHeckOrderSum_ReturnsNull()
-        //{
-        //    // Arrange
-        //    _context.Categories.Add(new Category {Name = "basic" });
-        //    await _context.SaveChangesAsync();
-
-        //    List<Product> products = new() { new() { Price = 6, Name = "Milk",Id = 1, Description = "tasty", Image = "1.jpg" }, new() { Price = 20, Name = "eggs", Id = 1, Description = "tasty", Image = "1.jpg" } };
-        //    _context.Products.AddRange(products);
-        //    await _context.SaveChangesAsync();
-
-        //    var orderItems = new List<OrderItem>() { new() { ProductId = 1 }, new() { ProductId = 2 } };
-        //    var order = new Order { OrderSum = 50, OrderItems = orderItems };
-
-        //    var orderService = new OrderServices(new OrderRepository(_context), new ProductsRepository(_context));
-
-        //    // Act
-        //    var result = await orderService.AddOrder(order);
-
-        //    // Assert
-        //    Assert.Null(result);
-        //}
+        }
 
 
 

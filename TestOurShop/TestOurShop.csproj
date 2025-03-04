@@ -20,9 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DTO\DTO.csproj" />
     <ProjectReference Include="..\Entitis\Entits.csproj" />
-    <ProjectReference Include="..\OurShop\OurShop.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>

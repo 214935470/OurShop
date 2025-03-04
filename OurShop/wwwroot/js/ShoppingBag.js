@@ -11,7 +11,7 @@ const DrawProducts = () => {
     document.getElementById("itemCount").textContent = products.length; 
     document.querySelector("tbody").innerHTML = ''
     for (let i = 0; i < products.length; i++) {
-        totalPrice += parseInt(products[i].price)
+        totalPrice += parseFloat(products[i].price)
         DrawProduct(products[i])
     }
     document.getElementById("totalAmount").textContent = totalPrice + '$';
@@ -23,10 +23,8 @@ const DrawProduct = (product) => {
     let url = `./pictures/${product.image}.JPG`
 
     ProductChild.querySelector(".image").style.backgroundImage = `url(${url})`
-    //cloneProduct.querySelector(".img").src = "./pictures/" + product.image
     ProductChild.querySelector(".itemName").textContent = product.name
     ProductChild.querySelector(".itemNumber").innerText = product.price
-    //cloneProduct.querySelector(".description").innerText = product.descreaptionProduct
     ProductChild.querySelector(".expandoHeight").addEventListener('click', () => { deleteFromCart(product) })
     document.querySelector("tbody").appendChild(ProductChild)
 }
@@ -72,9 +70,6 @@ const placeOrder = async () => {
 
 
             });
-            //if (!responsePost.ok) {
-            //    throw new Error(`HTTP error! status:${responsePost.status}`)
-            //}
 
             const dataPost = await responsePost.json();
 

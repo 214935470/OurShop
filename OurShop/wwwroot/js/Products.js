@@ -25,7 +25,6 @@ const reset = () => {
 }
 const GetProducts = async  () => {
     data =await getDataFromForm();
-    //let { nameSearch, minPrice, maxPrice, categoryIds } = await getData()
     categoryIds = JSON.parse(data.categoryIds)
     console.log(categoryIds.length);
     console.log(categoryIds.length);
@@ -144,7 +143,7 @@ const addCategory = async () => {
     }
     catch (error) {
 
-        alert("אין על לייקי ובתיה בכל העולם!!!!!!!!!!!!!!!!!")
+        alert("יש לכם שגיאה")
     }
 
 

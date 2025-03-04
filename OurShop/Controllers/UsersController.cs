@@ -85,20 +85,7 @@ namespace OurShop.Controllers
         {
             int result = userServices.cheakPassword(password);
             return result;
-            //using (StreamReader reader = System.IO.File.OpenText("M:\\webAPI\\OurShop\\OurShop\\Users.txt"))
-            //{
-            //    string? currentUserInFile;
-            //    while ((currentUserInFile = reader.ReadLine()) != null)
-            //    {
-            //        User user = JsonSerializer.Deserialize<User>(currentUserInFile);
-            //        if (user.Email == email && user.Password == password)
 
-            //            return Ok(user);
-
-
-            //    }
-            //}
-            //return NotFound();
 
 
         }
@@ -109,26 +96,12 @@ namespace OurShop.Controllers
         public async Task<ActionResult<User>> Login([FromQuery] string email, [FromQuery] string password)
         {
             User newUser =await userServices.Login(email,password);
-            //return (Ok(newUser));
             if (newUser != null)
             {
                 _logger.LogInformation($"login attempted with User Name , {newUser.FirstName} and password{newUser.LastName}");
             }
             return newUser != null ? Ok(newUser) : NoContent();
-            //using (StreamReader reader = System.IO.File.OpenText("M:\\webAPI\\OurShop\\OurShop\\Users.txt"))
-            //{
-            //    string? currentUserInFile;
-            //    while ((currentUserInFile = reader.ReadLine()) != null)
-            //    {
-            //        User user = JsonSerializer.Deserialize<User>(currentUserInFile);
-            //        if (user.Email == email && user.Password == password)
 
-            //            return Ok(user);
-
-
-            //    }
-            //}
-            //return NotFound();
 
 
         }
@@ -150,25 +123,7 @@ namespace OurShop.Controllers
 
 
 
-            //string textToReplace = string.Empty;
-            //using (StreamReader reader = System.IO.File.OpenText("M:\\webAPI\\OurShop\\OurShop\\Users.txt"))
-            //{
-            //    string currentUserInFile;
-            //    while ((currentUserInFile = reader.ReadLine()) != null)
-            //    {
 
-            //        User user = JsonSerializer.Deserialize<User>(currentUserInFile);
-            //        if (user.Id == id)
-            //            textToReplace = currentUserInFile;
-            //    }
-            //}
-
-            //if (textToReplace != string.Empty)
-            //{
-            //    string text = System.IO.File.ReadAllText("M:\\webAPI\\OurShop\\OurShop\\Users.txt");
-            //    text = text.Replace(textToReplace, JsonSerializer.Serialize(userToUpdate));
-            //    System.IO.File.WriteAllText("M:\\webAPI\\OurShop\\OurShop\\Users.txt", text);
-            //}
 
 
 
@@ -176,10 +131,5 @@ namespace OurShop.Controllers
         }
 
 
-        // DELETE api/<UsersController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

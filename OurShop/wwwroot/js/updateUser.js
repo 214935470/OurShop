@@ -46,7 +46,6 @@ const cheakPassword = async () => {
         if (dataPost < 3) {
             alert("חוזק סיסמא לא תקין")
         }
-       /* alert(dataPost)*/
         else
             updateLevel(dataPost)
     }
@@ -79,7 +78,6 @@ const updateUserr = async () => {
                 alert("update user sucsessfully")
                 sessionStorage.setItem("Id", postData.id)
                 sessionStorage.setItem("Email", postData.email)
-                //sessionStorage.setItem("Id", postData.lastName)
                 sessionStorage.setItem("FirstName", postData.firstName)
                 sessionStorage.setItem("LastName", postData.lastName)
                 window.location.href = "Products.html"
@@ -89,7 +87,6 @@ const updateUserr = async () => {
                     alert("חוזק סיסמא אינו תקין")
                 }
             }
-            /*alert(dataPost)*/
         }
 
         catch (err) {

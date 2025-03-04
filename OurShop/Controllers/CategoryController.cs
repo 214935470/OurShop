@@ -30,36 +30,8 @@ namespace OurShop.Controllers
             }
             List<Category> categoryList = categories;
             return categoryList != null ? Ok(categoryList) : BadRequest();
-            //return await categoryServices.GetCategory();
         }
 
-        // GET api/<CategoryController>/5
-        //[HttpGet("{id}")]
-        //public void GetCategoryById(int id)
-        //{
-        //    //return await categoryServices.GetCategoryById(id);
-        //}
 
-        // POST api/<CategoryController>
-        //[HttpPost]
-        //public void Post([FromBody] Category category)
-        //{
-        //   //return await categoryServices.AddCategory(category);
-        //}
-
-        // PUT api/<CategoryController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] Category category)
-        //{
-        //    //await categoryServices.UpdateCategory(id, category);
-        //}  
-
-
-        // DELETE api/<CategoryController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id, [FromBody] Category category)
-        //{
-        //    //await categoryServices.UpdateCategory(id, category);
-        //}
     }
 }

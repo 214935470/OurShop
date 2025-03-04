@@ -1,26 +1,25 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Microsoft.EntityFrameworkCore;
 
-namespace TestOurShop
+using Repository;
+
+namespace TestProject
 {
-    public class DatabaseFixture:IDisposable
+    public class DataBaseFixture : IDisposable
     {
         public AdoNetManageContext Context { get; private set; }
-
-        public DatabaseFixture()
+        public DataBaseFixture()
         {
             var options = new DbContextOptionsBuilder<AdoNetManageContext>()
-                .UseSqlServer("Server=srv2\\pupils;Database=Test_OurShop;Trusted_Connection=True;TrustServerCertificate=True")
+                .UseSqlServer("Server=srv2\\pupils;Database=Test_Laiky&Batya;Trusted_Connection=True;TrustServerCertificate=True")
                 .Options;
+
             Context = new AdoNetManageContext(options);
+            Context.Database.EnsureDeleted();
             Context.Database.EnsureCreated();
 
         }
+
         public void Dispose()
         {
             Context.Database.EnsureDeleted();
