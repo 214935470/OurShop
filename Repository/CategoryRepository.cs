@@ -17,22 +17,7 @@ namespace Repository
             this._AdoNetManageContext = manageDbContext;
         }
 
-        //public async Task<Category> AddCategory(Category category)
-        //{
-        //    await _AdoNetManageContext.Categories.AddAsync(category);
-        //    await _AdoNetManageContext.SaveChangesAsync();
-        //    return category;
-
-        //}
-
-        //public async Task UpdateCategory(int id, Category categoryToUpdate)
-        //{
-        //    categoryToUpdate.Id = id;
-
-        //    _AdoNetManageContext.Categories.Update(categoryToUpdate);
-
-        //    await _AdoNetManageContext.SaveChangesAsync();
-        //}
+      
 
         public async Task<List<Category>> GetCategory()
         {
