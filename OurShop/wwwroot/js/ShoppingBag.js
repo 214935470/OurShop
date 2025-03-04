@@ -20,7 +20,7 @@ const DrawProducts = () => {
 const DrawProduct = (product) => {
     let tmp = document.getElementById("temp-row");
     let ProductChild = tmp.content.cloneNode(true)
-    let url = `./pictures/${product.image}.JPEG`
+    let url = `./pictures/${product.image}.JPG`
 
     ProductChild.querySelector(".image").style.backgroundImage = `url(${url})`
     //cloneProduct.querySelector(".img").src = "./pictures/" + product.image

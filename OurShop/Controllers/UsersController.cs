@@ -14,11 +14,12 @@ namespace OurShop.Controllers
     {
         IUserServices userServices;
         IMapper mapper;
-
-        public UsersController(IUserServices userServices, IMapper mapper)
+        private readonly ILogger<UsersController> _logger;
+        public UsersController(IUserServices userServices, IMapper mapper, ILogger<UsersController> logger)
         {
             this.userServices = userServices;
             this.mapper = mapper;
+            _logger = logger;
         }
 
 
@@ -54,7 +55,10 @@ namespace OurShop.Controllers
                 return (BadRequest("סיסמא חלשה"));
             }
             User newUser = await userServices.AddUser(user);
-
+            if (newUser != null)
+            {
+                _logger.LogInformation($"login attempted with User Name , {newUser.FirstName} and password{newUser.LastName}");
+            }
 
             //if(newUser == null)
             //{
@@ -106,6 +110,10 @@ namespace OurShop.Controllers
         {
             User newUser =await userServices.Login(email,password);
             //return (Ok(newUser));
+            if (newUser != null)
+            {
+                _logger.LogInformation($"login attempted with User Name , {newUser.FirstName} and password{newUser.LastName}");
+            }
             return newUser != null ? Ok(newUser) : NoContent();
             //using (StreamReader reader = System.IO.File.OpenText("M:\\webAPI\\OurShop\\OurShop\\Users.txt"))
             //{

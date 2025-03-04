@@ -10,12 +10,12 @@ namespace Repository
         public static List<User> Users { get; set; }
 
         AdoNetManageContext _AdoNetManageContext;
-        private readonly ILogger<UserRepository> _logger;
+        //private readonly ILogger<UserRepository> _logger;
 
-        public UserRepository(AdoNetManageContext manageDbContext, ILogger<UserRepository> logger) 
+        public UserRepository(AdoNetManageContext manageDbContext) 
         {
             this._AdoNetManageContext = manageDbContext;
-            _logger = logger;
+            //_logger = logger;
         }
 
     //public UserRepository(AdoNetManageContext manageDbContext)
@@ -46,8 +46,8 @@ namespace Repository
             User user = await _AdoNetManageContext.Users.FirstOrDefaultAsync(u => (u.Email == email && u.Password == password));
           
 
-            if (user != null)
-                _logger.LogInformation($"login attempted with User Name , {email} and password{password}");
+            //if (user != null)
+            //    _logger.LogInformation($"login attempted with User Name , {email} and password{password}");
 
             return user;
 

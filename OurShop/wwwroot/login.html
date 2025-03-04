@@ -4,48 +4,46 @@
     <meta charset="utf-8" />
     <title></title>
     <script src="./js/login.js"></script>
-    <link href="./css/login.css" rel="stylesheet"/>
+    <link href="./css/login.css" rel="stylesheet" />
 </head>
 <body>
+    <button class="shopmore" onclick="window.location.href='Products.html?fromhome=1'">המשך בקניה</button>
 
-    <div class="registerHidden">
-        <h2 >email</h2>
-        <input id="email"  placeholder="email" />
+    <div class="container">
 
-        <h2 >password</h2>
-        <input onblur="cheakPassword()" id="password" placeholder="password"  /><progress id="level" value="0" max="4"></progress>
+        <div id="login" class="form-card">
+            <h2>התחברות</h2>
+            <label>כתובת מייל</label>
+            <input id="emailLogin" placeholder="email" />
+            <br />
+            <label>סיסמא</label>
+            <input id="passwordLogin" placeholder="password" />
 
-        <h2 >first name</h2>
-        <input id="firstName" placeholder="first name" />
+            <br />
 
+            <button onclick="fetchLogin()">כניסה</button>
 
-        <h2   >last name</h2>
-        <input id="lastName" placeholder="last name" />
+            <button class="newUser" onclick="showRegister()">משתמש חדש</button>
+        </div>
 
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+        <div class="registerHidden form-card">
 
-        <button onclick="addUser()" >register</button>
+            <h2>רישום</h2>
+            <label>כתובת מייל</label>
+            <input id="email" placeholder="email" type="email" />
+            <br />
+            <label>סיסמא</label>
+            <input onblur="cheakPassword()" id="password" placeholder="password" type="password" /><progress id="level" value="0" max="4"></progress>
+            <br />
+            <label>שם פרטי</label>
+            <input id="firstName" placeholder="first name" type="text" />
+            <br />
+            <label>שם משפחה</label>
+            <input id="lastName" placeholder="last name" type="text" />
+            <br />
+            <button onclick="addUser()">רישום</button>
+        </div>
+
     </div>
-
-    <h2>email</h2>
-    <input id="emailLogin" placeholder="email" />
-
-    <h2  >password</h2>
-    <input id="passwordLogin" placeholder="password"/>
-
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-
-    <button onclick="fetchLogin()">login</button>
-
-    <button class="newUser" onclick="showRegister()">new user</button>
-
 </body>
 </html>

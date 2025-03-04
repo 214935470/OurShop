@@ -12,10 +12,12 @@ namespace TestOurShop
     public class IntegrationTest:IClassFixture<DatabaseFixture>
     {
         private readonly AdoNetManageContext _context;
+        private readonly UserRepository _userRepository;
 
         public IntegrationTest(DatabaseFixture fixture)
         {
             _context = fixture.Context;
+            _userRepository = UserRepository(_context);
         }
 
         [Fact]

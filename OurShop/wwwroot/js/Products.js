@@ -75,7 +75,7 @@ const GetProducts = async  () => {
 const DrawProduct = (product) => {
     let tmp = document.getElementById("temp-card");
     let productChild = tmp.content.cloneNode(true)
-    productChild.querySelector("img").src = "./pictures/" + product.image +'.JPEG'
+    productChild.querySelector("img").src = "./pictures/" + product.image +'.JPG'
     productChild.querySelector("h1").textContent = product.name
     productChild.querySelector(".price").innerText = product.price
     productChild.querySelector(".description").innerText = product.description
